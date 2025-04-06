@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  orthanc1:
+    image: jodogne/orthanc
+    container_name: orthanc1
+    volumes:
+      - ./orthanc1/db:/var/lib/orthanc/db
+      - ./orthanc1/config.json:/etc/orthanc/orthanc.json
+      - ./orthanc1/scripts:/scripts
+    ports:
+      - "8042:8042"   # REST API của Orthanc1
+      - "4242:4242"   # DICOM port của Orthanc1
+
+  orthanc2:
+    image: jodogne/orthanc
+    container_name: orthanc2
+    volumes:
+      - ./orthanc2/db:/var/lib/orthanc/db
+      - ./orthanc2/config.json:/etc/orthanc/orthanc.json
+    ports:
+      - "8043:8042"   # REST API của Orthanc2 (được map từ cổng 8042 của container sang 8043 trên host)
+      - "4243:4242"   # DICOM port của Orthanc2 (được map từ cổng 4242 của container sang 4243 trên host)
