@@ -4,5 +4,7 @@
     "DicomAet": "ORTHANC2",
     "HttpPort": 8043,
     "AuthenticationEnabled": false,
-    "AllowAllUsers": true
+    "AllowAllUsers": true,
+    "RegisteredUsers": {},
+    "RemoteAccessAllowed": true
 }
