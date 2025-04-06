@@ -3,8 +3,6 @@
     "StorageDirectory": "/var/lib/orthanc/db",
     "DicomAet": "ORTHANC1",
     "HttpPort": 8042,
-    "RegisteredUsers": {
-      "admin": "yourpassword"
-    }
-  }
-  
+    "AuthenticationEnabled": false,
+    "AllowAllUsers": true
+}
