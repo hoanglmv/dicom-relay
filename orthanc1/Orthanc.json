@@ -1,0 +1,10 @@
+{
+    "Name": "Orthanc1",
+    "StorageDirectory": "/var/lib/orthanc/db",
+    "DicomAet": "ORTHANC1",
+    "HttpPort": 8042,
+    "RegisteredUsers": {
+      "admin": "yourpassword"
+    }
+  }
+  

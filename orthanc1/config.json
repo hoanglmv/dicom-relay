@@ -1,9 +1,0 @@
-{
-  "Name": "Orthanc1",
-  "AuthenticationEnabled": false,  // Tắt xác thực REST API
-  "HttpServerEnabled": true,
-  "HttpPort": 8042,
-  "DicomAet": "ORTHANC1",
-  "DicomPort": 4242,
-  "LuaScripts": [ "/scripts/forward.lua" ]
-}
