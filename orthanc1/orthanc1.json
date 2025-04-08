@@ -1,5 +1,7 @@
 {
     "Name": "Orthanc1",
+    "DicomPort": 4242,
+    "DicomAlwaysAllowStore": true,
     "StorageDirectory": "/var/lib/orthanc/db",
     "DicomAet": "ORTHANC1",
     "HttpPort": 8042,
