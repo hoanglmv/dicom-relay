@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "dicom_dir",
+			"path": "C:/Users/firek/Downloads/archive (1)/dicom_dir"
+		},
+		{
+			"name": "dicom-relay",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
