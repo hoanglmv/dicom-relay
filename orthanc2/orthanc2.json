@@ -6,5 +6,7 @@
     "AuthenticationEnabled": false,
     "AllowAllUsers": true,
     "RegisteredUsers": {},
-    "RemoteAccessAllowed": true
+    "RemoteAccessAllowed": true,
+    "DicomAlwaysAllowStore": true,
+    "Verbose": true
 }
