@@ -1,17 +1,19 @@
+// orthanc2/orthanc2.json
 {
-    "Name": "ORTHANC2",
-    "DicomPort": 4242,
-    "StorageDirectory": "/var/lib/orthanc/db",
-    "DicomAet": "ORTHANC2",
-    "HttpPort": 8043,
-    "AuthenticationEnabled": false,
-    "AllowAllUsers": true,
-    "RegisteredUsers": {},
-    "RemoteAccessAllowed": true,
-    "DicomAlwaysAllowStore": true,
-    "Verbose": true,
-    "LuaEnabled": true,
-    "LuaScripts": [
-        "/etc/orthanc2/observer.lua"
-    ]
+  "Name": "ORTHANC2",
+  "DicomPort": 4242,
+  "HttpPort": 8043,
+  "DicomAet": "ORTHANC2",
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "AuthenticationEnabled": false,
+  "AllowAllUsers": true,
+  "RemoteAccessAllowed": true,
+  "DicomAlwaysAllowStore": true,
+
+  "Verbose": true,
+  "LuaEnabled": true,
+  "LuaScripts": [
+    "/etc/orthanc/observer.lua"
+  ],
+  "ExecuteLuaEnabled": true
 }

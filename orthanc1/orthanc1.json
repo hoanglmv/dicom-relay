@@ -1,36 +1,41 @@
+// orthanc1/orthanc1.json
 {
-    "Name": "ORTHANC1",
-    "DicomPort": 4242,
-    "HttpPort": 8042,
-    "DicomAet": "ORTHANC1",
-    "StorageDirectory": "/var/lib/orthanc/db",
-    "AuthenticationEnabled": false,
-    "AllowAllUsers": true,
-    "RemoteAccessAllowed": true,
-    "DicomAlwaysAllowStore": true,
-    "Peers": {
-      "Orthanc2": {
-        "Aet": "ORTHANC2",
-        "Host": "ORTHANC2",
-        "Port": 4242,
-        "AllowEcho": true,
-        "AllowFind": true,
-        "AllowStore": true
-      }
-    },
-    "DicomModalities": {
-      "PACS2": ["ORTHANC2", "ORTHANC2", 4242]
-    },
-    "ForwardingRules": {
-      "AutoForwardToOrthanc2": {
-        "Sources": [ "*" ],
-        "Destinations": [ "PACS2" ]
-      }
-    },
-    "LuaEnabled": true,
-    "LuaScripts": [
-        "/etc/orthanc/forward.lua"
-    ],
-    "Verbose": true
-  }
-  
+  "Name": "ORTHANC1",
+  "DicomPort": 4242,
+  "HttpPort": 8042,
+  "DicomAet": "ORTHANC1",
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "AuthenticationEnabled": false,
+  "AllowAllUsers": true,
+  "RemoteAccessAllowed": true,
+  "DicomAlwaysAllowStore": true,
+
+  "Peers": {
+    "Orthanc2": {
+      "Aet": "ORTHANC2",
+      "Host": "orthanc2",
+      "Port": 4242,
+      "AllowEcho": true,
+      "AllowFind": true,
+      "AllowStore": true
+    }
+  },
+
+  "DicomModalities": {
+    "PACS2": ["ORTHANC2", "orthanc2", 4242]
+  },
+
+  "ForwardingRules": {
+    "AutoForwardToOrthanc2": {
+      "Sources": [ "*" ],
+      "Destinations": [ "PACS2" ]
+    }
+  },
+
+  "LuaEnabled": true,
+  "LuaScripts": [
+    "/etc/orthanc/forward.lua"
+  ],
+  "ExecuteLuaEnabled": true,
+  "Verbose": true
+}
