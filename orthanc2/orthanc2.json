@@ -9,6 +9,9 @@
     "RegisteredUsers": {},
     "RemoteAccessAllowed": true,
     "DicomAlwaysAllowStore": true,
-    "Verbose": true
-  }
-  
+    "Verbose": true,
+    "LuaEnabled": true,
+    "LuaScripts": [
+        "/etc/orthanc2/observer.lua"
+    ]
+}

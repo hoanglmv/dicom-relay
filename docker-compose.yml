@@ -26,6 +26,7 @@ services:
       - "4243:4242"   # Lưu ý: 4242 là cổng nội bộ, 4243 chỉ cho truy cập host bên ngoài
     volumes:
       - "./orthanc2/orthanc2.json:/etc/orthanc/orthanc.json:ro"
+      - "./orthanc2/observer.lua:/etc/orthanc/observer.lua:ro"
     restart: always
     networks:
       - dicom-network

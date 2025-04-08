@@ -27,6 +27,10 @@
         "Destinations": [ "PACS2" ]
       }
     },
+    "LuaEnabled": true,
+    "LuaScripts": [
+        "/etc/orthanc/forward.lua"
+    ],
     "Verbose": true
   }
   
