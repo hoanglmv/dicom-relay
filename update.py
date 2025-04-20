@@ -9,7 +9,7 @@ ORTHANC1_HOST = "localhost"  # Địa chỉ của Orthanc1
 ORTHANC1_PORT = 4242  # Cổng DICOM của Orthanc1
 
 # Đường dẫn file DICOM
-DICOM_FILE_PATH = r"D:\vhproj\dicom-relay\dicom_dir\ID_0089_AGE_0071_CONTRAST_0_CT.dcm"  # Thay bằng đường dẫn file DICOM của bạn
+DICOM_FILE_PATH = r"D:\vhproj\dicom-relay\dicom_dir\ID_0028_AGE_0074_CONTRAST_1_CT.dcm"  # Thay bằng đường dẫn file DICOM của bạn
 
 def send_dicom_to_orthanc1(dicom_file):
     # Kiểm tra file DICOM có tồn tại không

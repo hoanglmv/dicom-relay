@@ -1,31 +1,31 @@
 version: "3"
 services:
-  orthanc1:
+  hospital_pacs:
     image: jodogne/orthanc-plugins:latest
     build:
-      context: ./orthanc1
+      context: ./hospital_pacs
       dockerfile: Dockerfile
-    container_name: orthanc1
+    container_name: hospital_pacs
     ports:
       - "8042:8042"
       - "4242:4242"
     volumes:
-      - "./orthanc1/orthanc1.json:/etc/orthanc/orthanc.json:ro"
+      - "./hospital_pacs/orthanc1.json:/etc/orthanc/orthanc.json:ro"
     restart: always
     networks:
       - dicom-network
 
-  orthanc2:
+  research_pacs:
     image: jodogne/orthanc-plugins:latest
     build:
-      context: ./orthanc2
+      context: ./research_pacs
       dockerfile: Dockerfile
-    container_name: orthanc2
+    container_name: research_pacs
     ports:
-      - "8043:8043"
-      - "4243:4242"   # Lưu ý: 4242 là cổng nội bộ, 4243 chỉ cho truy cập host bên ngoài
+      - "8043:8042"   # gắn cổng HTTP container 8042 ra ngoài bằng 8043
+      - "4243:4242"   # gắn cổng DICOM container 4242 ra ngoài bằng 4243
     volumes:
-      - "./orthanc2/orthanc2.json:/etc/orthanc/orthanc.json:ro"
+      - "./research_pacs/orthanc2.json:/etc/orthanc/orthanc.json:ro"
     restart: always
     networks:
       - dicom-network

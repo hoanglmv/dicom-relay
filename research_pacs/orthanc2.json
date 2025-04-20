@@ -1,0 +1,12 @@
+{
+  "Name": "RESEARCH-PACS",
+  "DicomAet": "RESEARCH-PACS",
+  "DicomPort": 4242,
+  "HttpPort": 8042,
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "AuthenticationEnabled": false,
+  "AllowAllUsers": true,
+  "RemoteAccessAllowed": true,
+  "DicomAlwaysAllowStore": true,
+  "Verbose": true
+}

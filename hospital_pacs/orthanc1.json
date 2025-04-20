@@ -1,0 +1,29 @@
+{
+  "Name": "HOSPITAL-PACS",
+  "DicomAet": "HOSPITAL-PACS",
+  "DicomPort": 4242,
+  "HttpPort": 8042,
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "AuthenticationEnabled": false,
+  "AllowAllUsers": true,
+  "RemoteAccessAllowed": true,
+  "DicomAlwaysAllowStore": true,
+
+  "DicomModalities": {
+    "RESEARCH-PACS": [ "RESEARCH-PACS", "research_pacs", 4242 ]
+  },
+
+  "Peers": {
+    "RESEARCH-PACS": {
+      "Aet": "RESEARCH-PACS",
+      "Host": "research_pacs",        
+      "Port": 4242,
+      "AllowEcho": true,
+      "AllowFind": true,
+      "AllowStore": true
+    }
+  },
+
+  "Plugins": [],
+  "Verbose": true
+}
