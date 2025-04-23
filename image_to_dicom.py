@@ -1,70 +1,54 @@
-import os
 import pydicom
-import numpy as np
-import cv2
 from pydicom.dataset import Dataset, FileDataset
+from pydicom.uid import generate_uid, ExplicitVRLittleEndian
+import numpy as np
+from PIL import Image
 import datetime
-import time
-import uuid
+import os
 
-def convert_png_to_dicom(png_path, output_dicom_path, patient_name="Test^Patient", patient_id="123456"):
-    # Đọc ảnh PNG
-    img = cv2.imread(png_path, cv2.IMREAD_GRAYSCALE)  # DICOM thường là grayscale
-    if img is None:
-        raise ValueError(f"Không thể đọc ảnh: {png_path}")
-    
-    # Lấy kích thước ảnh
-    rows, cols = img.shape
+def image2dicom(png_path, dicom_path, patient_id="CT001", study_id="STUDY001"):
+    # Đọc ảnh PNG và chuyển sang mảng numpy
+    image = Image.open(png_path).convert("L")  # Grayscale
+    pixel_array = np.array(image)
 
-    # Tạo DICOM dataset
-    file_meta = pydicom.dataset.FileMetaDataset()
-    file_meta.MediaStorageSOPClassUID = pydicom.uid.generate_uid()
-    file_meta.MediaStorageSOPInstanceUID = pydicom.uid.generate_uid()
-    file_meta.ImplementationClassUID = "1.2.826.0.1.3680043.10.543"
-
-    ds = FileDataset(output_dicom_path, {}, file_meta=file_meta, preamble=b"\0" * 128)
-
-    # Thông tin thời gian
     dt = datetime.datetime.now()
-    ds.ContentDate = dt.strftime("%Y%m%d")
-    ds.ContentTime = dt.strftime("%H%M%S.%f")
+    current_time = dt.strftime("%H%M%S")
+    current_date = dt.strftime("%Y%m%d")
 
-    # Các tag cơ bản
-    ds.PatientName = patient_name
-    ds.PatientID = patient_id
-    ds.StudyInstanceUID = str(uuid.uuid4())
-    ds.SeriesInstanceUID = str(uuid.uuid4())
+    # khởi tạo 1 file meta information cho một file dicom => ĐỌc thêm về m
+    file_meta = pydicom.Dataset() # Khởi tạo đối tượng Dataset trong file DICOM ( từ nhóm tag 0008 trở đi) chứa meta data và pixel data của hình ảnh, bao gồm nhiều module như Patient Module, Study Module, Series Module
+    file_meta.MediaStorageSOPClassUID = pydicom.uid.SecondaryCaptureImageStorage # khởi tạo class UID
+    file_meta.MediaStorageSOPInstanceUID = generate_uid() # Khởi tạo íntanceUID
+    file_meta.ImplementationClassUID = generate_uid()
+
+    ds = FileDataset(dicom_path, {}, file_meta=file_meta, preamble=b"\0" * 128)
+    ds.is_little_endian = True
+    ds.is_implicit_VR = False
+
+    # Gán các tag cơ bản
+    ds.SOPClassUID = file_meta.MediaStorageSOPClassUID
     ds.SOPInstanceUID = file_meta.MediaStorageSOPInstanceUID
+    ds.StudyInstanceUID = generate_uid()
+    ds.SeriesInstanceUID = generate_uid()
+    ds.PatientID = patient_id
+    ds.StudyID = study_id
     ds.Modality = "CT"
-    ds.StudyDate = dt.strftime("%Y%m%d")
-    ds.SeriesNumber = "1"
-    ds.InstanceNumber = "1"
+    ds.StudyDate = current_date
+    ds.StudyTime = current_time
 
-    # Kích thước ảnh
-    ds.Rows = rows
-    ds.Columns = cols
+    # Lưu trữ dữ liệu ảnh
+    ds.Rows, ds.Columns = pixel_array.shape
     ds.SamplesPerPixel = 1
     ds.PhotometricInterpretation = "MONOCHROME2"
+    ds.PixelRepresentation = 0
     ds.BitsAllocated = 8
     ds.BitsStored = 8
     ds.HighBit = 7
-    ds.PixelRepresentation = 0
-
-    # Gán dữ liệu ảnh
-    ds.PixelData = img.tobytes()
+    ds.PixelData = pixel_array.tobytes()
 
     # Lưu file DICOM
-    ds.save_as(output_dicom_path)
-    print(f"Đã lưu: {output_dicom_path}")
+    ds.save_as(dicom_path)
+    print(f"✔️ Converted {png_path} to {dicom_path}")
 
-# Ví dụ chuyển nhiều ảnh
-input_folder = "dicom_dir"
-output_folder = "output"
 
-os.makedirs(output_folder, exist_ok=True)
-
-for filename in os.listdir(input_folder):
-    if filename.endswith(".png"):
-        input_path = os.path.join(input_folder, filename)
-        output_path = os.path.join(output_folder, filename.replace(".png", ".dcm"))
-        convert_png_to_dicom(input_path, output_path)
+image2dicom("/home/myvh/hoang/project/dicom-relay/Data/test/adenocarcinoma/000108 (3).png", "output/image.dcm")
