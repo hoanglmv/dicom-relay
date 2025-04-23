@@ -9,10 +9,6 @@
   "RemoteAccessAllowed": true,
   "DicomAlwaysAllowStore": true,
 
-  "DicomModalities": {
-    "RESEARCH-PACS": [ "RESEARCH-PACS", "research_pacs", 4242 ]
-  },
-
   "Peers": {
     "RESEARCH-PACS": {
       "Aet": "RESEARCH-PACS",
