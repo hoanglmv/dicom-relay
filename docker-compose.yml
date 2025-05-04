@@ -29,7 +29,22 @@ services:
     restart: always
     networks:
       - dicom-network
-
+  watcher:
+      build: ./watcher
+      container_name: watcher
+      restart: always
+      volumes:
+        - ./dcm:/app/dcm
+      networks:
+        - dicom-network
+  forwarder:
+    build: ./forwarder
+    restart: always
+    depends_on:
+      - hospital_pacs
+    networks:
+      - dicom-network
 networks:
   dicom-network:
     driver: bridge
+

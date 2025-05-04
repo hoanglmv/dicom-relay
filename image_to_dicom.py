@@ -38,8 +38,8 @@ def image2dicom(png_path, dicom_path, patient_id="CT001", study_id="STUDY001"):
 
     # Lưu trữ dữ liệu ảnh
     ds.Rows, ds.Columns = pixel_array.shape
-    ds.SamplesPerPixel = 1
-    ds.PhotometricInterpretation = "MONOCHROME2"
+    ds.SamplesPerPixel = 1 # Ảnh độ xám
+    ds.PhotometricInterpretation = "MONOCHROME2" # giá trị 0 là đen,255 là trắng
     ds.PixelRepresentation = 0
     ds.BitsAllocated = 8
     ds.BitsStored = 8
